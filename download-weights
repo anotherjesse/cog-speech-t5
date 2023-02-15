@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+
+import os
+import shutil
+from transformers import SpeechT5Processor, SpeechT5ForTextToSpeech, SpeechT5HifiGan
+import settings
+
+if os.path.exists(settings.MODEL_CACHE):
+    shutil.rmtree(settings.MODEL_CACHE)
+os.makedirs(settings.MODEL_CACHE)
+
+SpeechT5Processor.from_pretrained(settings.MODEL_NAME, cache_dir=settings.MODEL_CACHE)
+SpeechT5ForTextToSpeech.from_pretrained(settings.MODEL_NAME, cache_dir=settings.MODEL_CACHE)
+SpeechT5HifiGan.from_pretrained(settings.VOCODER_NAME, cache_dir=settings.MODEL_CACHE)
